@@ -9,11 +9,11 @@
 #define _HEADER_H_
 
 #include <stdlib.h>
-#include<iostream>
+#include <iostream>
 #include <iomanip>
 #include <string.h>
 #include <vector>
-#include<math.h>
+#include <math.h>
 
 using namespace std;
 
@@ -31,7 +31,13 @@ extern int g_memory_size;
 extern double g_p_best_rate;
 extern double g_arc_rate;
 
+extern bool g_write_gen_trace;
+
 void cec14_test_func(double *, double *,int,int,int);
+
+//jp do
+int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rate, double p_best_rate,bool write_gen_trace);
+//jp do
 
 class searchAlgorithm {
 public:

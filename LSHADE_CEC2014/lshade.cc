@@ -112,17 +112,17 @@ Fitness LSHADE::run() {
 
       //generate CR_i and repair its value
       if (mu_cr == -1) {
-	pop_cr[target] = 0;
+          pop_cr[target] = 0;
       }
       else {
-	pop_cr[target] = gauss(mu_cr, 0.1);
-	if (pop_cr[target] > 1) pop_cr[target] = 1;
-	else if (pop_cr[target] < 0) pop_cr[target] = 0;	
+          pop_cr[target] = gauss(mu_cr, 0.1);
+          if (pop_cr[target] > 1) pop_cr[target] = 1;
+          else if (pop_cr[target] < 0) pop_cr[target] = 0;
       }
 
       //generate F_i and repair its value
       do {	
-	pop_sf[target] = cauchy_g(mu_sf, 0.1);
+          pop_sf[target] = cauchy_g(mu_sf, 0.1);
       } while (pop_sf[target] <= 0);
 
       if (pop_sf[target] > 1) pop_sf[target] = 1;
@@ -136,7 +136,7 @@ Fitness LSHADE::run() {
     evaluatePopulation(children, children_fitness);
 
     /////////////////////////////////////////////////////////////////////////
-  //update the bsf-solution and check the current number of fitness evaluations
+    //update the bsf-solution and check the current number of fitness evaluations
     // if the current number of fitness evaluations over the max number of fitness evaluations, the search is terminated
     // So, this program is unconcerned about L-SHADE algorithm directly
     for (int i = 0; i < pop_size; i++) {
