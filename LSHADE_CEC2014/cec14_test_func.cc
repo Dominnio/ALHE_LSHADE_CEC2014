@@ -10,6 +10,8 @@
 #include <math.h>
 #include <malloc.h>
 
+#include"de.h"
+
 #define INF 1.0e99
 #define EPS 1.0e-14
 #define E  2.7182818284590452353602874713526625
@@ -64,6 +66,9 @@ extern int ini_flag,n_flag,func_flag,*SS;
 
 void cec14_test_func(double *x, double *f, int nx, int mx,int func_num)
 {
+    //jp do
+    g_fun_call++;
+    //jo do
 	int cf_num=10,i,j;
 	if (ini_flag==1)
 	{

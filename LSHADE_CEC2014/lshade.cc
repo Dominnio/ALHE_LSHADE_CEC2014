@@ -8,7 +8,10 @@
 #include"de.h"
 
 Fitness LSHADE::run() {
-  cout << scientific << setprecision(8);
+    //jp do
+    g_fun_call = 0;
+    //jp do
+  cout /*<< scientific*/ << setprecision(12);
   initializeParameters();
   setSHADEParameters();
 
@@ -53,7 +56,6 @@ Fitness LSHADE::run() {
     //   //      cout << nfes << " " << bsf_fitness - optimum << endl; 
     //   cout << bsf_fitness - optimum << endl; 
     // }
-
     if (nfes >= max_num_evaluations) break;
   }
   ////////////////////////////////////////////////////////////////////////////
@@ -139,24 +141,28 @@ Fitness LSHADE::run() {
     //update the bsf-solution and check the current number of fitness evaluations
     // if the current number of fitness evaluations over the max number of fitness evaluations, the search is terminated
     // So, this program is unconcerned about L-SHADE algorithm directly
-    for (int i = 0; i < pop_size; i++) {
+    for (int i = 0; i < pop_size; i++) {//wypisywanie populacji
       nfes++;
 
       //following the rules of CEC 2014 real parameter competition, 
       //if the gap between the error values of the best solution found and the optimal solution was 10^{−8} or smaller,
       //the error was treated as 0
-      if ((children_fitness[i] - optimum) < epsilon) children_fitness[i] = optimum;
+      if ((children_fitness[i] - optimum) < epsilon)
+        children_fitness[i] = optimum;
 
       if (children_fitness[i] < bsf_fitness) {
-  	bsf_fitness = children_fitness[i];
-  	for (int j = 0; j < problem_size; j ++) bsf_solution[j] = children[i][j];
+        bsf_fitness = children_fitness[i];
+  	      for (int j = 0; j < problem_size; j ++)
+  	        bsf_solution[j] = children[i][j];
       }
 
       // if (nfes % 1000 == 0) {
       // //      cout << nfes << " " << bsf_fitness - optimum << endl; 
       // 	cout << bsf_fitness - optimum << endl; 
       // }
-      if (nfes >= max_num_evaluations) break;
+
+      if (nfes >= max_num_evaluations)
+        break;
     }
     ////////////////////////////////////////////////////////////////////////////
 
@@ -247,6 +253,7 @@ Fitness LSHADE::run() {
       p_num = round(pop_size *  p_best_rate);
       if (p_num <= 1)  p_num = 2;
     }
+    file<<g_function_number<<";"<<g_fun_call<<";"<<(double)bsf_fitness<<"\n";
   }
 
   return bsf_fitness - optimum;

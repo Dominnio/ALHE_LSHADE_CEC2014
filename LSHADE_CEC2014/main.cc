@@ -15,6 +15,12 @@ int main(int argc, char ** argv){
     double p_rate = atof(argv[5]);
     if(number_of_runs == 0 || dimension_size == 0 || memory_size == 0 || archive_rate == 0 || p_rate == 0)
         arc_read_error();
-    //cout<<" "<<number_of_runs<<" "<<dimension_size<<" "<<memory_size<<" "<<archive_rate<<" "<<p_rate<<" "<<"\n";
-    LSHADE_main(number_of_runs,dimension_size,memory_size,archive_rate,p_rate,true);
+
+
+    string fileName  = string("results/result for ") + string(argv[2]) + string(" dimension.txt");
+    file.open(fileName.c_str(),ios::out);
+    file<< setprecision(12);
+    LSHADE_main(number_of_runs,dimension_size,memory_size,archive_rate,p_rate);
+
+    file.close();
 }

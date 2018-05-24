@@ -22,9 +22,10 @@ double g_arc_rate;
 int g_memory_size;
 double g_p_best_rate;
 
-bool g_write_gen_trace;
+fstream file;
+long long g_fun_call;
 
-int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rate, double p_best_rate,bool write_gen_trace) {
+int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rate, double p_best_rate) {
   //number of runs
   int num_runs = num_runs_;//51
   //dimension size. please select from 10, 30, 50, 100
@@ -41,12 +42,10 @@ int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rat
   g_arc_rate = arc_rate;//2.6
   g_p_best_rate = p_best_rate;//0.11
 
-  g_write_gen_trace = write_gen_trace;
-
  for (int i = 0; i < 30; i++) {
     g_function_number = i + 1;
-    cout << "\n-------------------------------------------------------" << endl;
-    cout << "Function = " << g_function_number << ", Dimension size = " << g_problem_size << "\n" << endl;
+    //cout << "\n-------------------------------------------------------" << endl;
+    //cout << "Function = " << g_function_number << ", Dimension size = " << g_problem_size << "\n" << endl;
 
     Fitness *bsf_fitness_array = (Fitness*)malloc(sizeof(Fitness) * num_runs);
     Fitness mean_bsf_fitness = 0;
@@ -55,7 +54,7 @@ int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rat
     for (int j = 0; j < num_runs; j++) { 
       searchAlgorithm *alg = new LSHADE();
       bsf_fitness_array[j] = alg->run();
-      cout << j + 1 << ". run, " << "error value = " << bsf_fitness_array[j] << endl;
+      //cout << j + 1 << ". run, " << "error value = " << bsf_fitness_array[j] << endl;
     }
   
     for (int j = 0; j < num_runs; j++) mean_bsf_fitness += bsf_fitness_array[j];
@@ -65,7 +64,7 @@ int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rat
     std_bsf_fitness /= num_runs;
     std_bsf_fitness = sqrt(std_bsf_fitness);
 
-    cout  << "\nmean = " << mean_bsf_fitness << ", std = " << std_bsf_fitness << endl;
+    //cout  << "\nmean = " << mean_bsf_fitness << ", std = " << std_bsf_fitness << endl;
     free(bsf_fitness_array);
   }
 

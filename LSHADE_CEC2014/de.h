@@ -14,6 +14,7 @@
 #include <string.h>
 #include <vector>
 #include <math.h>
+#include <fstream>
 
 using namespace std;
 
@@ -36,7 +37,9 @@ extern bool g_write_gen_trace;
 void cec14_test_func(double *, double *,int,int,int);
 
 //jp do
-int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rate, double p_best_rate,bool write_gen_trace);
+int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rate, double p_best_rate);
+extern long long g_fun_call;
+extern fstream file;
 //jp do
 
 class searchAlgorithm {
