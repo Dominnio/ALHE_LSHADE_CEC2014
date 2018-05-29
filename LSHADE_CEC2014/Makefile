@@ -2,7 +2,7 @@ HEADER = de.h
 TARGET = lshade_exe
 
 OBJS := $(patsubst %.cc,%.o,$(wildcard *.cc))
-CC = g++
+CC = g++ -std=c++11
 OPTION = -O3
 
 $(TARGET): $(OBJS)

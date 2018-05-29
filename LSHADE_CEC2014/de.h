@@ -20,7 +20,7 @@ using namespace std;
 
 typedef  double variable;
 typedef variable *Individual;
-typedef  double Fitness;
+typedef long double Fitness;
 
 extern int g_function_number;
 extern int g_problem_size;
@@ -34,10 +34,10 @@ extern double g_arc_rate;
 
 extern bool g_write_gen_trace;
 
-void cec14_test_func(double *, double *,int,int,int);
+void cec17_test_func(double *, double *,int,int,int);
 
 //jp do
-int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rate, double p_best_rate);
+int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rate, double p_best_rate, int n_init, string filename);
 extern long long g_fun_call;
 extern fstream file;
 //jp do

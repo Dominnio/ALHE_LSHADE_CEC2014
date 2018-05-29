@@ -253,7 +253,7 @@ Fitness LSHADE::run() {
       p_num = round(pop_size *  p_best_rate);
       if (p_num <= 1)  p_num = 2;
     }
-    file<<g_function_number<<";"<<g_fun_call<<";"<<(double)bsf_fitness<<"\n";
+    file<<g_function_number<<";"<<g_fun_call<<";"<<(long double)bsf_fitness<<"\n";
   }
 
   return bsf_fitness - optimum;

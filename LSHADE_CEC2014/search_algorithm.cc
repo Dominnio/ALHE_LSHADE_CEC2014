@@ -20,7 +20,7 @@ void searchAlgorithm::initializeParameters() {
 
 void searchAlgorithm::evaluatePopulation(const vector<Individual> &pop, vector<Fitness> &fitness) {
   for (int i = 0; i < pop_size; i++) {
-    cec14_test_func(pop[i],  &fitness[i], problem_size, 1, function_number);
+    cec17_test_func(pop[i],  (double*)&fitness[i], problem_size, 1, function_number);
   }
 }
 

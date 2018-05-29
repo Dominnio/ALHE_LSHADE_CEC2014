@@ -25,48 +25,53 @@ double g_p_best_rate;
 fstream file;
 long long g_fun_call;
 
-int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rate, double p_best_rate) {
-  //number of runs
-  int num_runs = num_runs_;//51
-  //dimension size. please select from 10, 30, 50, 100
-  g_problem_size = problem_size;//10
-  //available number of fitness evaluations 
-  g_max_num_evaluations = g_problem_size * 10000;
+int LSHADE_main(int num_runs_, int problem_size, int memory_size, double arc_rate, double p_best_rate, int n_init, string filename) {
+    //number of runs
+    int num_runs = num_runs_;//51
+    //dimension size. please select from 10, 30, 50, 100
+    g_problem_size = problem_size;//10
+    //available number of fitness evaluations
+    g_max_num_evaluations = g_problem_size * 10000;
 
-  //random seed is selected based on time according to competition rules
-  srand((unsigned)time(NULL));
+    //random seed is selected based on time according to competition rules
+    srand((unsigned)time(NULL));
 
-  //L-SHADE parameters
-  g_pop_size = (int)round(g_problem_size * 18);
-  g_memory_size = memory_size;//6
-  g_arc_rate = arc_rate;//2.6
-  g_p_best_rate = p_best_rate;//0.11
+    //L-SHADE parameters
+    g_pop_size = (int)round(g_problem_size * n_init);
+    g_memory_size = memory_size;//6
+    g_arc_rate = arc_rate;//2.6
+    g_p_best_rate = p_best_rate;//0.11
 
- for (int i = 0; i < 30; i++) {
-    g_function_number = i + 1;
-    //cout << "\n-------------------------------------------------------" << endl;
-    //cout << "Function = " << g_function_number << ", Dimension size = " << g_problem_size << "\n" << endl;
+    file.open(filename,ios::out);
+    for (int i = 0; i < 30; i++) {
+        g_function_number = i + 1;
+//        cout << "\n-------------------------------------------------------" << endl;
+//        cout << "Function = " << g_function_number << ", Dimension size = " << g_problem_size << "\n" << endl;
+//
+//        Fitness *bsf_fitness_array = (Fitness*)malloc(sizeof(Fitness) * num_runs);
+//        Fitness mean_bsf_fitness = 0;
+//        Fitness std_bsf_fitness = 0;
 
-    Fitness *bsf_fitness_array = (Fitness*)malloc(sizeof(Fitness) * num_runs);
-    Fitness mean_bsf_fitness = 0;
-    Fitness std_bsf_fitness = 0;
+        for (int j = 0; j < num_runs; j++) {
+            //searchAlgorithm *alg = new LSHADE();
+            LSHADE alg;
+            //bsf_fitness_array[j] = alg->run();
+            /*bsf_fitness_array[j] = */alg.run();
+            //cout << j + 1 << ". run, " << "error value = " << bsf_fitness_array[j] << endl;
+        }
 
-    for (int j = 0; j < num_runs; j++) { 
-      searchAlgorithm *alg = new LSHADE();
-      bsf_fitness_array[j] = alg->run();
-      //cout << j + 1 << ". run, " << "error value = " << bsf_fitness_array[j] << endl;
+
+//        for (int j = 0; j < num_runs; j++) mean_bsf_fitness += bsf_fitness_array[j];
+//        mean_bsf_fitness /= num_runs;
+//
+//        for (int j = 0; j < num_runs; j++) std_bsf_fitness += pow((mean_bsf_fitness - bsf_fitness_array[j]), 2.0);
+//        std_bsf_fitness /= num_runs;
+//        std_bsf_fitness = sqrt(std_bsf_fitness);
+//
+//        cout  << "\nmean = " << mean_bsf_fitness << ", std = " << std_bsf_fitness << endl;
+//        free(bsf_fitness_array);
     }
-  
-    for (int j = 0; j < num_runs; j++) mean_bsf_fitness += bsf_fitness_array[j];
-    mean_bsf_fitness /= num_runs;
-
-    for (int j = 0; j < num_runs; j++) std_bsf_fitness += pow((mean_bsf_fitness - bsf_fitness_array[j]), 2.0);
-    std_bsf_fitness /= num_runs;
-    std_bsf_fitness = sqrt(std_bsf_fitness);
-
-    //cout  << "\nmean = " << mean_bsf_fitness << ", std = " << std_bsf_fitness << endl;
-    free(bsf_fitness_array);
-  }
-
-  return 0;
+    file.close();
+    return 0;
 }
+
